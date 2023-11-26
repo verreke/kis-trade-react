@@ -51,7 +51,7 @@ import Icon from "@mui/material/Icon";
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
+    name: "상한가 종목",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
@@ -59,13 +59,13 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Tables",
+    name: "HB10",
     key: "tables",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables",
     component: <Tables />,
   },
-  {
+  /* {
     type: "collapse",
     name: "Billing",
     key: "billing",
@@ -112,7 +112,7 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
-  },
+  }, */
 ];
 
 export default routes;

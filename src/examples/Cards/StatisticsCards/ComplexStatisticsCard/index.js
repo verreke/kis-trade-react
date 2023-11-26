@@ -48,7 +48,7 @@ function ComplexStatisticsCard({ color, title, count, percentage, icon }) {
         </MDBox>
         <MDBox textAlign="right" lineHeight={1.25}>
           <MDTypography variant="button" fontWeight="light" color="text">
-            {title}
+            종목 이름
           </MDTypography>
           <MDTypography variant="h4">{count}</MDTypography>
         </MDBox>
@@ -62,9 +62,38 @@ function ComplexStatisticsCard({ color, title, count, percentage, icon }) {
             fontWeight="bold"
             color={percentage.color}
           >
-            {percentage.amount}
+            신고가 : {percentage.amount}
           </MDTypography>
-          &nbsp;{percentage.label}
+        </MDTypography>
+        <MDTypography component="p" variant="button" color="text" display="flex">
+          <MDTypography
+            component="span"
+            variant="button"
+            fontWeight="bold"
+            color={percentage.color}
+          >
+            오후 1시 이전 달성 : {percentage.amount}
+          </MDTypography>
+        </MDTypography>
+        <MDTypography component="p" variant="button" color="text" display="flex">
+          <MDTypography
+            component="span"
+            variant="button"
+            fontWeight="bold"
+            color={percentage.color}
+          >
+            거래량 200억 이상 : {percentage.amount}
+          </MDTypography>
+        </MDTypography>
+        <MDTypography component="p" variant="button" color="text" display="flex">
+          <MDTypography
+            component="span"
+            variant="button"
+            fontWeight="bold"
+            color={percentage.color}
+          >
+            상한가 3% 이하 구간 : {percentage.amount}
+          </MDTypography>
         </MDTypography>
       </MDBox>
     </Card>
