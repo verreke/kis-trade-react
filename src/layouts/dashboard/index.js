@@ -35,12 +35,21 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
   const [stockInfo, setStockInfo] = useState([]);
+  const urlUpperPriceStock = `http://3.35.228.162:3000/upperpricestock`;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function getchStcokInfo() {
+      const resUpperpricestock = await axios.get(urlUpperPriceStock);
+      console.log(resUpperpricestock.data);
+      setStockInfo(resUpperpricestock.data);
+    }
+    getchStcokInfo();
+  }, []);
 
   return (
     <DashboardLayout>
@@ -62,7 +71,29 @@ function Dashboard() {
               />
             </MDBox>
           </Grid> */}
-          <Grid item xs={12} md={6} lg={3}>
+          {stockInfo.map((stock) => (
+            <Grid item xs={12} md={6} lg={3} key={stock.stock_code}>
+              <MDBox mb={1.5}>
+                <ComplexStatisticsCard
+                  icon="leaderboard"
+                  title="Today's Users"
+                  count={stock.stock_name}
+                  percentage={{
+                    color: "success",
+                    amount: "+3%",
+                    label: "than last month",
+                  }}
+                  condition={{
+                    newhigh: stock.new_high,
+                    before13: stock.reach_before,
+                    volume: stock.over_trading_value,
+                    break: stock.break_count,
+                  }}
+                />
+              </MDBox>
+            </Grid>
+          ))}
+          {/* <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
@@ -75,7 +106,7 @@ function Dashboard() {
                 }}
               />
             </MDBox>
-          </Grid>
+          </Grid> */}
           {/* <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
