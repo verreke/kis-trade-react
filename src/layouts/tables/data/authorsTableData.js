@@ -50,16 +50,23 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "종목", accessor: "stockname", width: "10%", align: "left" },
+      { Header: "buy1", accessor: "buy1price", align: "left" },
+      { Header: "buy2", accessor: "buy2price", align: "left" },
+      { Header: "buy3", accessor: "buy3price", align: "center" },
+      { Header: "sell", accessor: "sellprice", align: "left" },
     ],
 
     rows: [
       {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+        stockname: <span>asdfasdf</span>,
+        buy1price: <span>123</span>,
+        buy2price: <span>123</span>,
+        buy3price: <span>buy1price</span>,
+        sellprice: <span>1234</span>,
+      },
+      {
+        author: <span>asdfasdf</span>,
         function: <Job title="Manager" description="Organization" />,
         status: (
           <MDBox ml={-1}>
@@ -77,7 +84,7 @@ export default function data() {
           </MDTypography>
         ),
       },
-      {
+      /* {
         author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
         function: <Job title="Programator" description="Developer" />,
         status: (
@@ -171,7 +178,7 @@ export default function data() {
             Edit
           </MDTypography>
         ),
-      },
+      }, */
     ],
   };
 }

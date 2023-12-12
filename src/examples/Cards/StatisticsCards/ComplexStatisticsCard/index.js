@@ -51,49 +51,58 @@ function ComplexStatisticsCard({ color, title, count, percentage, condition, ico
           <MDTypography variant="button" fontWeight="light" color="text">
             종목 이름
           </MDTypography>
-          <MDTypography variant="h4">{count}</MDTypography>
+          <MDTypography variant="h4">
+            {condition.newhigh === 1 &&
+            condition.before13 === 1 &&
+            condition.volume === 1 &&
+            condition.break < 2 ? (
+              <span style={{ color: "green" }}>{count}</span>
+            ) : (
+              <span style={{ color: "grey" }}>{count}</span>
+            )}
+          </MDTypography>
         </MDBox>
       </MDBox>
       <Divider />
       <MDBox pb={2} px={2}>
         <MDTypography component="p" variant="button" color="text" display="flex">
-          <MDTypography
-            component="span"
-            variant="button"
-            fontWeight="bold"
-            color={percentage.color}
-          >
-            신고가 : {condition.newhigh === 1 ? "OK" : "NG"}
+          <MDTypography component="span" variant="button" fontWeight="bold">
+            신고가 :{" "}
+            {condition.newhigh === 1 ? (
+              <span style={{ color: "green" }}>OK</span>
+            ) : (
+              <span style={{ color: "red" }}>NG</span>
+            )}
           </MDTypography>
         </MDTypography>
         <MDTypography component="p" variant="button" color="text" display="flex">
-          <MDTypography
-            component="span"
-            variant="button"
-            fontWeight="bold"
-            color={percentage.color}
-          >
-            오후 1시 이전 달성 : {condition.before13 === 1 ? "OK" : "NG"}
+          <MDTypography component="span" variant="button" fontWeight="bold">
+            오후 1시 이전 달성 :
+            {condition.before13 === 1 ? (
+              <span style={{ color: "green" }}>OK</span>
+            ) : (
+              <span style={{ color: "red" }}>NG</span>
+            )}
           </MDTypography>
         </MDTypography>
         <MDTypography component="p" variant="button" color="text" display="flex">
-          <MDTypography
-            component="span"
-            variant="button"
-            fontWeight="bold"
-            color={percentage.color}
-          >
-            거래량 200억 이상 : {condition.volume === 1 ? "OK" : "NG"}
+          <MDTypography component="span" variant="button" fontWeight="bold">
+            거래량 200억 이상 :
+            {condition.volume === 1 ? (
+              <span style={{ color: "green" }}>OK</span>
+            ) : (
+              <span style={{ color: "red" }}>NG</span>
+            )}
           </MDTypography>
         </MDTypography>
         <MDTypography component="p" variant="button" color="text" display="flex">
-          <MDTypography
-            component="span"
-            variant="button"
-            fontWeight="bold"
-            color={percentage.color}
-          >
-            상한가 3% 이하 구간 : {condition.break}
+          <MDTypography component="span" variant="button" fontWeight="bold">
+            상한가 3% 이하 구간 :
+            {condition.break < 2 ? (
+              <span style={{ color: "green" }}>{condition.break}</span>
+            ) : (
+              <span style={{ color: "red" }}>{condition.break}</span>
+            )}
           </MDTypography>
         </MDTypography>
       </MDBox>

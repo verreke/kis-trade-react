@@ -36,15 +36,49 @@ import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
   const [stockInfo, setStockInfo] = useState([]);
   const urlUpperPriceStock = `http://3.35.228.162:3000/upperpricestock`;
+  const [startDate, setStartDate] = useState(new Date());
+
+  const handleDateChange = async (date) => {
+    setStartDate(date);
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const formattedDate = date
+      .toLocaleDateString("ko-KR", options)
+      .replace(/\./g, "")
+      .replace(/ /g, "/");
+    console.log("handleDateChange");
+    console.log(formattedDate);
+
+    const params = {
+      date: formattedDate, // YYYY/MM/DD 포맷
+    };
+
+    const resUpperpricestock = await axios.get(urlUpperPriceStock, { params });
+    console.log(resUpperpricestock.data);
+    setStockInfo(resUpperpricestock.data);
+  };
 
   useEffect(() => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const formattedDate = startDate
+      .toLocaleDateString("ko-KR", options)
+      .replace(/\./g, "")
+      .replace(/ /g, "/");
+    console.log(formattedDate);
+
+    const params = {
+      date: formattedDate, // YYYY/MM/DD 포맷
+    };
+
     async function getchStcokInfo() {
-      const resUpperpricestock = await axios.get(urlUpperPriceStock);
+      const resUpperpricestock = await axios.get(urlUpperPriceStock, { params });
       console.log(resUpperpricestock.data);
       setStockInfo(resUpperpricestock.data);
     }
@@ -54,6 +88,7 @@ function Dashboard() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <DatePicker selected={startDate} onChange={handleDateChange} />
       <MDBox py={3}>
         <Grid container spacing={3}>
           {/* <Grid item xs={12} md={6} lg={3}>
